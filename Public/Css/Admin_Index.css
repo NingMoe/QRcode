@@ -1,0 +1,77 @@
+* {
+    margin:0;
+    padding:0;
+}
+body{
+    font-size: 12px;
+    font-family:verdana, arial, helvetica, sans-serif;
+}
+.upload-div{
+    width: 45%;
+}
+.upload-text{
+    cursor: pointer;
+}
+.table-div{
+    margin-top: 20px;
+    height: 500px
+}
+#td-content{
+    vertical-align: middle;
+    text-align: left; 
+    padding-left: 25px;
+}
+#td-path{
+    vertical-align: middle;
+}
+#td-size{
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 20px;
+}
+.hand-perm{
+    position: relative;
+    font-size: 30px;
+    vertical-align: middle;
+}
+.text-perm{
+    margin-left: 20px;
+    font-size:20px;
+    vertical-align: middle;
+}
+
+
+@media screen and (max-width: 600px) { 
+    #blinkWord{
+        display: none;
+    }
+    #password{
+        margin-top: 10px;
+    }
+    #user{
+        margin-bottom: 10px;
+    }
+    .btn-theme  {
+        float: right !important;
+        color: #fff;
+        background-color: #009f4b;
+        border-color: #009f4b;
+    }
+    #login_button{
+        float: right;
+    }
+}
+
+
+/*分页*/
+.fenye{
+    font-size: 16px;
+    font-weight: bold;
+}
+div.jogger{padding:2px;margin:7px;font-family:"lucida sans unicode", "lucida grande", lucidagrande, "lucida sans", 
+               geneva, verdana, sans-serif;margin: 20px;}
+div.jogger a{padding:0.5em 0.64em 0.43em 0.64em;margin:2px;color:#fff;background-color:#009f4b;text-decoration:none;}
+div.jogger a:hover{padding:0.5em 0.64em 0.43em 0.64em;margin:2px;color:#fff;background-color:#009f4b;}
+div.jogger a:active{padding:0.5em 0.64em 0.43em 0.64em;margin:2px;color:#fff;background-color:#009f4b;}
+div.jogger span.current{padding:0.5em 0.64em 0.43em 0.64em;margin:2px;color:#6d643c;background-color:#f6efcc;}
+div.jogger span.disabled{display:none;}

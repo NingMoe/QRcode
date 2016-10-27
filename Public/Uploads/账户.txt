@@ -1,0 +1,64 @@
+微信官方后台用户名密码:
+	• 用户名：neowaytech
+	• 密码：yfinnos1018
+有方招聘：hr@innos.com   neoway2016
+	http://career.neoway.com/
+	
+微信服务器
+	• 218.244.134.57 - Done
+	用户名：administrator
+	密码：nwt@20160112
+	
+	AppID(应用ID)
+	wxc5f390183c49edbc
+	
+	AppSecret(应用密钥)
+	e9d5cd6923592a9a1b19347a554f21bb
+
+ngrok -config ngrok.cfg -subdomain neoway 80
+neoway.ngrok.natapp.cn
+
+	
+weiPHP系统
+http://218.244.134.57/weiphp/
+
+用户名：Administrator
+密码：neoway
+
+mysql帐号：root
+mysql密码：neoway
+mysql另一个用户可用来连接lpy+lpy
+
+xampp帐号：admin
+密码：neoway
+
+
+——————————————————————————————————————————————————————————————————
+测试weichat
+前台+后台neoway+neoway
+——————————————————————————————————————————————————————————————————
+weiphp3
+前台后台：administrator+neoway
+数据库：root+neoway，数据库名weiphp3，前缀wp_
+
+测试号
+公众号名称  wxid_2637486374812的接口测试号
+原始ID 微信号： gh_0bae1df6e487  
+appID  wx43ee22ebf261e45b
+appsecret  f74ef0b20f6f7e6bc3b7efbd68948ede
+URL  http://neoway.ngrok.natapp.cn/weiphp3/index.php?s=/home/weixin/index/id/1.html
+Token  weiphp
+域名  neoway.ngrok.natapp.cn
+——————————————————————————————————————————————————————————————————
+onethink
+administrator+neoway
+
+
+——————————————————————————————————————————————————————————————————
+旧oa系统：可以看工资条，工号+123456
+——————————————————————————————————————————————————————————————————
+待完成：
+网页爬虫
+网页信息采集
+git使用
+http权威指南

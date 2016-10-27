@@ -1,0 +1,44 @@
+
+<ul class=mtree>
+    <li value="文件夹1"><a href="#">1</a>
+		<ul>
+			<li value="文件夹2"><a href="#">2</a></li> 
+			<li value="文件夹3"><a href="#">3</a>
+				<ul>
+					<li value="文件夹4"><a href="#">4</a></li> 
+					<li value="215,Array"><a href="#">...</a></li> 
+				</ul>
+			</li>
+			<li value="213,Array"><a href="#">...</a></li> 
+		</ul>
+	</li>
+	<li value="文件夹5"><a href="#">5</a></li> 
+	<li value="212,220,221"><a href="#">...</a></li> 
+</ul>
+				 
+				 
+<!--            <if condition="$list[$i] eq 'ul'">
+                <ul>
+                    <elseif condition="$list[$i] eq '/ul'" /> 
+                        <if condition="$list[$i+1] neq ''">
+                            </ul></li>
+                            <else /> </ul>
+                        </if>
+                <else /> 
+                    <if condition="$list[$i+1] eq 'ul'">
+                        <li value="<{$list[$i][1]}>"><a href="#"><{$list[$i][0]}></a>
+                        <else /> <li value="<{$list[$i][1]}>"><a href="#"><{$list[$i][0]}></a></li>
+                    </if>
+            </if>-->
+			
+			
+			
+
+			
+<!--        <volist name="lists" id="list">
+            <if condition="$list eq 'ul'">
+                <ul>
+                    <elseif condition="$list eq '/ul'" /> </ul>
+                <else /> <li value="<{$list[1]}>"><a href="#"><{$list[0]}></a></li>
+            </if>
+        </volist>-->

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <meta content="width=device-width,user-scalable=no" name="viewport"> 
+        <title>有方科技</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="__PUBLIC__/Images/favicon.ico" />
+        <style type="text/css">
+            div{
+                width: 100%;
+                text-align: center;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div width="100%" style="margin-top:30px;"><img src="__PUBLIC__/Images/logo.png" width="80%" alt="logo"/></div>
+        <div style="margin-top: 100px;">
+            <switch name="post" >
+            <case value="doc"><img src="__PUBLIC__/Images/type/WORD.png" width="40%" alt="word"/></case>
+            <case value="ppt"><img src="__PUBLIC__/Images/type/PPT.png" width="40%" alt="ppt"/></case>
+            <case value="pdf"><img src="__PUBLIC__/Images/type/PDF.png" width="40%" alt="pdf"/></case>
+            <case value="rar|zip"><img src="__PUBLIC__/Images/type/RAR.png" width="40%" alt="rar"/></case>
+            <case value="txt"><img src="__PUBLIC__/Images/type/TXT.png" width="40%" alt="txt"/></case>
+            <case value="png"><img src="__PUBLIC__/Images/type/PNG.png" width="40%" alt="png"/></case>
+            <case value="jpg"><img src="__PUBLIC__/Images/type/JPG.png" width="40%" alt="jpg"/></case>
+            <default />       <img src="__PUBLIC__/Images/type/File.png" width="40%" alt="file"/>
+            </switch>
+        </div>
+        <input type="hidden" id="name" value="<{$filename}>"/>
+        <div style="margin-top: 20px;text-align:center;word-wrap:break-word;" onclick="down()">
+            <p  style="color:#595656;line-height:2;font-family:'sans-serif';"><{$filename}></p>
+        </div>
+        <div onclick="down()">
+            <h1 style="background-color: #36B477;width: 200px;text-align: center;margin: 20px auto;color: #FFF;padding:10px;">Download</h1>
+        </div>
+        
+        <script language="javascript" type="text/javascript">
+            //<![CDATA[ 		
+            function down() {
+                file_name = document.getElementById('name').value;
+                if(file_name){
+                    window.location.href = "http://218.244.134.57/qrcode/public/Uploads/" + file_name;
+                }else{
+                    alert('对不起，小编并未找到下载的文档哟！');
+                }
+            }
+            //]]> 
+        </script>
+    </body>
+</html>
