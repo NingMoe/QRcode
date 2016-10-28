@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>文件列表</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id='fileData'  style="min-height:495px;">
+            <div  style="min-height:478px;">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">序号</th>
+                            <th style="width:40%;">文件名</th>
+                            <th id="tr-path" style="width:10%;display:none;">路径</th>
+                            <th  style="width:10%;">下载量</th>
+                            <th id="tr-size" style="width:5%;">大小</th>
+                            <th id="tr-date" style="width:15%;">日期</th>
+                            <th style="width:15%;">生成二维码</th>
+                            <th style="width:5%;">删除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <if condition="$files eq array()">
+                        <tr>
+                            <td colspan='8'>
+                                <div style='height: 100px;vertical-align: middle;line-height: 100px;font-size: 15px;'>暂未查询到数据，请检查后重新查询！</div>
+                            </td>
+                        </tr>
+                    </if>
+                    <volist id="f" name="files">
+                        <tr>
+                            <td id="td-content">
+                                <input name="che" id="<{$f.fileid}>" type="checkbox" onchange="is_all()"/>&nbsp;<{$i}>
+                            </td>
+                            <td id="td-content">
+                                <a href="__URL__/download?fileid=<{$f.fileid}>" style="text-decoration: none;" title="<{$f.filename}>"><{$f.shortname}></a>
+                            </td>
+                            <!--<td id="td-path">./Public/Uploads</td>-->
+                            <td id="td-size"><{$f.downloads}></td>
+                            <td id="td-size"><{$f.size}></td>
+                            <td id="td-date"><php>echo date("Y.m.d H:i",strtotime($f["uploadtime"]))</php></td>
+                        <td id="td-pic">
+                            <button class="btn btn-default" id="<{$f.fileid}>" type="button" name="qrBtn"><span class="glyphicon glyphicon-qrcode"></span></button>
+                        </td>
+                        <td id="td-pic"><button class="btn btn-default" type="button" onclick="todel( <{$f.fileid}> )"><span class="glyphicon glyphicon-trash"></span></button></td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+            <!--分页-->
+            <div class="fenye jogger pull-right"><{$page}></div>
+        </div>
+
+        <!--导入js文件-->
+        <script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
+        <!--bootstrap-->
+        <script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <script language="javascript"  type="text/javascript"  src="__PUBLIC__/Js/Admin_Home.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                //点击生成二维码的按钮，ajax返回图片路径
+                $("[name='qrBtn']").click(function(){
+                    $.ajax({
+                        type:"POST",
+                        url:"__URL__/create_qr",
+                        data:{"fileid":$(this).attr("id")},
+                        success:function(data){
+                            //截取文件名
+                            var shortName;
+                            if (data.dialog_displayname.length > 16) {
+                                shortName = data.dialog_displayname.substr(0, 16) + "...";
+                            } else {
+                                shortName = data.dialog_displayname;
+                            }
+                            $("#qrImg").attr("src","/qrcode3/Public/logoQR/"+data.dialog_filename);
+                            $("#qrSpan").text(shortName).attr('title',data.dialog_displayname);
+                            $("#qrModal").modal('show');
+                            $("#qrTBtn").click(function(){
+                                $("#qrModal").modal('hide');
+                                window.location.href = "/qrcode3/index.php/Home/Index/dialog_qrdownload?fileid=" + data.dialog_fileid;
+                            });
+                        }
+                    },"json");
+                });
+            });
+            function fileData(pid) {    //user函数名 一定要和action中的第三个参数一致上面有
+                var pid = pid;
+                $.get('__URL__/fileData', {'p': pid}, function(data) {
+                    $("#fileData").replaceWith("<div  id='fileData'>" + data + "</div>");
+                });
+            }
+        </script>
+    </body>
+</html>

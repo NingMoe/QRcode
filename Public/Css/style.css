@@ -1,5 +1,5 @@
 body {
-    background-color: #f2f2f2;
+    
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-size: 16px;
@@ -63,6 +63,10 @@ a:after {
     color: #c6d550;
 }
 
+.navbar-inverse {
+	border-radius: 0; 
+}
+
 .alignleft {
     text-align: left;
 }
@@ -113,10 +117,10 @@ a.navbar-brand:hover {
     background-color: #444;
     background: url('/qrcode/Public/Images/main-bg.jpg') no-repeat center top;
     margin-top: -20px;
-    padding-top: 150px;
+    padding-top: 50px;
     background-attachment: relative;
     background-position: center center;
-    min-height: 750px;
+    min-height: 665px;
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -143,7 +147,7 @@ a.navbar-brand:hover {
 
 #pageheader {	
     background-color: #fff;
-    margin-top: -20px;
+    /*margin-top: -20px;*/
     padding-top: 60px;
     background-attachment: relative;
     background-position: center center;
@@ -248,15 +252,16 @@ p.copyright {
         left: 50%;
         margin-left: -50px;
     }
-    #header , #pageheader {
-        min-height: 665px;
+    #header,#pageheader{
+	min-height: 665px;
+    }
+    #pageheader{
+        padding-top: 10px;
     }
 }
 
 @media screen and (min-width: 1200px) { 
     #footer {
-        position:fixed;
-        bottom:0;
         padding: 15px 0 5px;
     }
 }

@@ -1,75 +1,6 @@
-window.onload = function() {
-    var dia_shortfile;
-    dia_file = document.getElementById('dialog_file').value;
-    if (dia_file) {
-        var diag = new Dialog();
-        diag.Width = 300;
-        diag.Height = 260;
-        diag.Title = "下载二维码图片吗？";
-        //截取文件名
-        if (dia_file.length > 10) {
-            dia_shortfile = dia_file.substr(0, 10) + "...";
-        } else {
-            dia_shortfile = dia_file;
-        }
-
-        diag.InnerHtml = "<img src='/qrcode/Public/logoQR/" + dia_file + "' alt='二维码'/><br><span style='font-size:18px;color:#0055FF' title='" + dia_file + "'>" + dia_shortfile + "</span>";
-        diag.OKEvent = function() {
-            window.location.href = "/qrcode/index.php/Index/dialog_qrdownload?filename=" + dia_file;
-            setTimeout('window.history.back();', 100);
-            diag.close();
-        }; //点击确定后调用的方法
-        diag.CancelEvent = function() {
-            window.history.back();
-        }
-        diag.show();
-//            setTimeout('window.location.href="/qrcode/index.php/Index/home";',1000);
-    }
-}
 $().ready(function() {
-    //上传前判断是否已经上传过
-    $('#up_form').submit(function(event) {
-        event.preventDefault();
-        t = $('#text').val();
-        //去除名称中的文件路径
-        p = t.lastIndexOf('\\');
-        t = (p != -1) ? t.substr(p + 1) : t;
-        t = t.replace('—', '_');
-        $.post("/qrcode/index.php/Index/upload", {text_name: t}, function(msg) {
-            if (msg.status == 2) {   //文件已经上传过
-                // 文件末尾自动添加（2）等字符
-//                $('#modalBodyText').html(msg.info);
-//                $('#countDown').html(5);
-//                $('#uploadModal').modal('show');
-//                $("#modalFButton").attr("class", "btn btn-sm btn-default");
-//
-//                fBtn = 0;
-//                $('#modalFButton').click(function() {
-//                    fBtn = 1;
-//                    $('#uploadModal').modal('hide');
-//                    $('#res').click();
-//
-//                });
-//                interval = setInterval("var n=parseInt($('#countDown').html());n--;$('#countDown').html(n)", 1000);
-//                setTimeout("$('#uploadModal').modal('hide');clearInterval(interval);if(fBtn==0){$('#modalButton').click();}", 5000);
-//                $('#countDown').html(5);
-//                $('#modalButton').click(function() {
-//                    document.getElementById("text").value = msg.data;
-//                });
-
-                //覆盖上传
-                if(confirm("确定要覆盖原上传文件吗？")){
-                    //标记，是覆盖上传
-                    $("#coverUpload").val("cover");
-                    
-                    document.getElementById('up_form').submit();
-                }
-            } else {
-                //文件没有上传过，继续上传
-                document.getElementById('up_form').submit();
-            }
-        });
-    })
+    
+        
 });
 function upToDatabase() {
     var txt = document.getElementById("text").value;
@@ -96,7 +27,7 @@ function upToDatabase() {
 }
 function todel(fid) {
     if (confirm("确定删除吗？")) {
-        window.location.href = "/qrcode/index.php/Index/del?fileid=" + fid;
+        window.location.href = "/qrcode3/index.php/Home/Index/del?fileid=" + fid;
     }
 }
 function allselect() {
@@ -141,7 +72,7 @@ function downloads() {
     if (ids.length) {
         //下载选中的文件
         if (confirm("确认下载所选项吗？")) {
-            window.location.href = "/qrcode/index.php/Index/lot_download?fileids=" + ids.join(',');
+            window.location.href = "/qrcode3/index.php/Home/Index/lot_download?fileids=" + ids.join(',');
         }
     } else {
         alert("请至少选中一项后，再进行操作！");
@@ -152,7 +83,7 @@ function deletes() {
     ids = getids();
     if (ids.length) {
         if (confirm("确认删除所选项吗？")) {
-            window.location.href = "/qrcode/index.php/Index/lot_del?fileids=" + ids.join(',');
+            window.location.href = "/qrcode3/index.php/Home/Index/lot_del?fileids=" + ids.join(',');
         }
     } else {
         alert("请至少选中一项后，再进行操作！");

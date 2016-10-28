@@ -1,0 +1,76 @@
+<include file="head" title="电子资料二维码下载 | 有方科技"/>
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1><{:C('INDEX_DESCRIPTION_TITLE')}></h1>
+                <h2 class="subtitle"><{:C('INDEX_DESCRIPTION')}></h2>
+                <form class="form-inline signup"  id="login" method="post" name="login" onsubmit="return false" role="form">
+                    <div class="form-group">
+                        <input class="form-control" id="user"  name="user" type="text" placeholder="输入用户名" 
+                               data-toggle="popover" data-placement="bottom" data-content='<span style="color: rgb(245, 0, 0);" class="glyphicon glyphicon-remove">用户名错误！</span>'>
+                        <input class="form-control" id="password" name="password" type="password" placeholder="输入密码"
+                               data-toggle="popover" data-placement="bottom" data-content='<span style="color: rgb(245, 0, 0);" class="glyphicon glyphicon-remove">密码错误！</span>'>
+                    </div>
+                    <button  class="btn btn-theme" id="login_button" style="width:100px;">登录</button>
+                </form>				
+            </div>
+            <div class="col-lg-4 col-lg-offset-2">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="__PUBLIC__/Images/slide1.png" alt="QQ二维码">
+                        </div>
+                        <div class="item">
+                            <img src="__PUBLIC__/Images/slide2.png" alt="微信二维码">
+                        </div>
+                    </div>
+                </div>		
+            </div>
+        </div>
+    </div>
+</div>
+<load href="__PUBLIC__/Js/Base.js" /> 
+<!--<load href="__PUBLIC__/Js/prototype.js" />--> 
+<load href="__PUBLIC__/Js/mootools.js" /> 
+<load href="__PUBLIC__/Js/ThinkAjax.js" /> 
+<!--<script language="javascript"  type="text/javascript"  src="__PUBLIC__/Js/jquery-1.9.1.js"></script>-->
+
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $("#user").focus(function() {
+        $('#user').popover('hide');
+    });
+    $("#user").blur(function() {
+        if ($('#user').val() != "admin") {
+            $('#user').popover({html: true});
+            $('#user').popover('show');
+        }
+    });
+    $('#login_button').click(function() {
+//        alert($('#user').val());
+        $.ajax({
+            type: "POST",
+            url: "__URL__/login",
+            data: {user: $('#user').val(), password: $('#password').val()},
+            success: function(data) {
+                if (data.status == "1") {
+//                    alert(data.status);
+                    window.location.href = "__URL__/home";
+                } else {
+//                    alert(data.status);
+                    $('#password').popover({html: true});
+                    $('#password').popover('show');
+//                    $('#login').onsubmit="return false";
+                }
+            }
+        }, "json");
+    });
+</script>
+<include file="foot"/>

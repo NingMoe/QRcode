@@ -1,0 +1,89 @@
+<include file="head" title="电子资料二维码下载 | 有方科技"/>
+<if condition="isset($_SESSION['username']) && $_SESSION['username'] neq ''">
+    <script language="javascript" type="text/javascript">
+        //<![CDATA[ 		
+        window.location.href = "__URL__/home";
+        //]]> 
+    </script>
+</if>
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-1">
+                <h1><{:C('INDEX_DESCRIPTION_TITLE')}></h1>
+                <h2 class="subtitle"><{:C('INDEX_DESCRIPTION')}></h2>
+                <form class="form signup"  id="login" method="post" name="login" onsubmit="return false" role="form">
+                    <div class="col-lg-12">
+                        <div class="col-lg-8 form-group has-feedback" style="margin-left: 15px;">
+                            <input class="form-control" id="user"  name="user" type="text" placeholder="输入用户名">
+                            <span class="glyphicon glyphicon-user form-control-feedback" style='position: absolute;right: 20px;'></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-8 form-group has-feedback" style="margin-left: 15px;">
+                            <input class="form-control" id="password" name="password" type="password" placeholder="输入密码">
+                            <span class="glyphicon glyphicon-lock form-control-feedback" style='position: absolute;right: 20px;'></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-8 form-group" style="padding : 0 10px 0 48px;">
+                        <div class="" style="display: inline;line-height: 34px;">
+                            <label><input type="checkbox" id="remember" name="remember"><span class="text-success"><b>一个月内免登陆</b></span></label>
+                        </div>
+                        <button  class="btn btn-theme pull-right" id="login_button" style="width:100px;">登录</button>
+                    </div>
+                    
+                    <div class="col-lg-8" style="max-height: 0; overflow: hidden; text-align: center; transition: max-height 2s ease;">
+                        <span class="text-danger" id="detail"></span>
+                    </div>
+                </form>				
+            </div>
+            <div class="col-lg-4 col-lg-offset-1">
+                <img style="margin-top: 60px;" src="__PUBLIC__/Images/slide1.png" alt="二维码">
+            </div>
+        </div>
+    </div>
+</div>
+<load href="__PUBLIC__/Js/Base.js" /> 
+<!--<load href="__PUBLIC__/Js/prototype.js" />--> 
+<load href="__PUBLIC__/Js/mootools.js" /> 
+<load href="__PUBLIC__/Js/ThinkAjax.js" /> 
+<!--<script language="javascript"  type="text/javascript"  src="__PUBLIC__/Js/jquery-1.9.1.js"></script>-->
+
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   $(function(){ 
+	$(".navbar-inverse").removeClass("navbar-fixed-top");
+	
+   });
+    $("#user").blur(function() {
+        if ($('#user').val() != "admin") {
+            $('#user').parent().addClass("has-error");
+            $('#user').css("box-shadow","0 0 15px #000");
+            setTimeout('$("#user").css("box-shadow","0 0 5px #000");',500);
+            setTimeout('$("#user").css("box-shadow","0 0 15px #000");',1000);
+        }
+    });
+    $('#login_button').click(function() {
+//        alert($('#user').val());
+        $.ajax({
+            type: "POST",
+            url: "__APP__/Home/User/login",
+            data: {user: $('#user').val(), password: $('#password').val(), remember: $('#remember').is(':checked')},
+            success: function(data) {
+//                alert(data.status);
+                if (data.status == 1) {
+                    window.location.href = "__URL__/home";
+                } else {
+                    $('#password').parent().addClass("has-error");
+                    $('#password').css("box-shadow","0 0 15px #000");
+                    $("#detail").text(data.error);
+                    $("#detail").parent().css('max-height','34px');
+                    setTimeout("$('#detail').parent().css('max-height','0px')",2000);
+                }
+            }
+        }, "json");
+    });
+</script>
+<include file="foot"/>

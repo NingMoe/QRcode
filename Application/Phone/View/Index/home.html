@@ -1,0 +1,146 @@
+<include file="head" title="首页 - 有方科技"/>
+
+<!--导入css文件-->
+<load href="__PUBLIC__/Css/Admin_Home.css"/>
+
+<!--导入分类树样式-->
+<link href="__PUBLIC__/Css/mtree.css" rel="stylesheet" type="text/css">
+
+<div id="pageheader" data-lpy="lll">
+    <div class="container" style="min-height: 500px;">
+        <!--导航栏-->
+        <div style="">
+            <div id="root" class="panel-group">
+                <for start="1" end="sizeof($lists)">
+                    <if condition="$lists[$i] eq 'ul'">
+                        <div id="panelGroup<{$i}>" class="panel-group" style="margin-left: 10px;">
+                    </if>
+                    <if condition="$lists[$i] eq '/ul'" >
+                        </div></div></div>
+                    </if>
+                    <if condition="is_array($lists[$i])">
+                        <if condition="$lists[$i][1] eq '...'">
+                            <div id="<{$lists[$i][3]}>ajaxDataTree">
+                                <!--文件列表-->
+                                <div class="table-div table-responsive">
+                                    <table class="table table-striped table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:65%;">文件名</th>
+                                                <th id="td-size" style="width:20%;">大小</th>
+                                                <th id="td-down" style="width:15%;">下载</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <volist id="f" name="lists[$i][0]" key="y">
+                                                <tr>
+                                                    <td id="td-content">
+                                                        <a href="javascript:;"  onclick="fildown('<{$f.filerepeat}>','<{$f.filename}>','<{$f.fileid}>')"
+                                                           style="text-decoration: none;" title="<{$f.filename}>"><{$f.shortname}></a>
+                                                    </td>
+                                                    <td id="td-size"><{$f.size}></td>
+                                                    <td id="td-down">
+                                                        <button class="btn btn-sm btn-default" type="button" onclick="fildown('<{$f.filerepeat}>','<{$f.filename}>','<{$f.fileid}>')">
+                                                            <span class="glyphicon glyphicon-download"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                        </tbody>
+                                    </table>
+                                    <!--分页-->
+                                    <div class="fenye jogger pull-right"><{$lists[$i][2]}></div>
+                                </div>
+                            </div>
+                        <elseif condition="$lists[$i+1] eq 'ul'"/>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <h5 style="margin: 0px;"><a id="<{$lists[$i][0]}>" data-toggle="collapse" data-parent="#" style="display: inline-block;width: 100%;"
+                                                   href="#<{$lists[$i][0]}>Panel"><{$lists[$i][1]}></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="panel-collapse collapse" id="<{$lists[$i][0]}>Panel">
+                            <else />
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <h5 style="margin: 0px;"><a id="<{$lists[$i][0]}>" data-toggle="collapse" data-parent="#" style="display: inline-block;width: 100%;"
+                                                   href="#<{$lists[$i][0]}>Panel"><{$lists[$i][1]}></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="panel-collapse collapse" id="<{$lists[$i][0]}>Panel" >
+                                        <div class="panel-body">
+                                            <div id="<{$lists[$i][0]}>Data"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </if>
+                    </if>
+                </for>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--导入js文件-->
+<!--<script language="javascript"  type="text/javascript"  src="__PUBLIC__/Js/jquery-1.9.1.js"></script>-->
+
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/Js/Admin_Home.js"></script>
+<script language="javascript"  type="text/javascript"  src="__PUBLIC__/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        //折叠框点击事件
+        $('.panel-title a').click(function(){
+            catId=$(this).attr("id");
+//            alert(catId);
+            $.ajax({
+                type: "POST",
+                url: "__URL__/ajaxData",
+                data: {'catId': catId},
+                success: function(returnData) {
+//                    alert(returnData);
+                    $("#"+catId+"Data").replaceWith("<div data-foldId='"+catId+"'>" + returnData + "</div>");
+                }
+            }, "json");
+        });
+    });
+    
+    window.onload=function(){
+        $(".panel-title").each(function(){
+            var parid = $(this).parents(".panel-group:first").attr("id");
+            $(this).find("a").attr("data-parent","#"+parid);
+        });
+    };
+    
+    function ajaxDataFuncTree(catId, pid) {    //user函数名 一定要和action中的第三个参数一致上面有
+//        catId=window.event.srcElement.id;
+        n = catId.indexOf("aTree");
+        catId = catId.substr(0, n);
+//        $("#span").text(catId+<{$catId}>);
+        var pid = pid;
+        $.get('__URL__/ajaxDataTree', {'p': pid, 'catId': catId}, function(data) {  //用get方法发送信息到UserAction中的user方法
+//            alert(data);
+            $("#" + catId + "ajaxDataTree").replaceWith("<div  id='" + catId + "ajaxDataTree'>"
+                    + data + "</div>"); //user一定要和tpl中的一致
+        });
+        
+    }
+    
+    //手机端下载文件
+    function fildown(frepeat,fname,fid){
+        $.ajax({
+            type:"POST",
+            url:"__URL__/countDown",
+            data:{"fileId":fid},
+            success:function(data){
+            }
+        });
+        var filename=frepeat?frepeat:fname;
+        window.location.href = "http://218.244.134.57/qrcode3/public/Uploads/" + filename;
+    }
+</script>
+
+<include file="foot"/>

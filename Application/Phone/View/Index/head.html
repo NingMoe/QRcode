@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>[title]</title>
+        <link rel="shortcut icon" href="__PUBLIC__/Images/favicon.ico" />
+
+        <!-- Bootstrap -->
+        <link href="__PUBLIC__/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="__PUBLIC__/plugins/bootstrap-3.3.5-dist/css/bootstrap-theme.css" rel="stylesheet">
+
+        <!-- style -->
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet">
+
+        <!-- HTML5 shiV and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="__URL__/home"><{:C('WEB_SITE_TITLE')}></a>
+                </div>
+
+                <div class="navbar-collapse collapse">
+
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 60px;padding-left: 15%;padding-right: 15%;background-color: #fff;">
+            <form class="" id="search_btn" method="post" action="__URL__/firstsearch" >
+                <div class="input-group">
+                    <if condition='$searchname neq ""'>
+                        <input class="form-control" type="text" name="searchname" required="required" oninvalid="setCustomValidity('搜索框的值不能为空！');" id="s" value="<{$searchname}>" onclick="this.value = ''"> 
+                        <else/>
+                        <input class="form-control" type="text" name="searchname" required="required" oninvalid="setCustomValidity('搜索框的值不能为空！');"  id="s" placeholder="搜索..." onclick="this.value = ''"> 
+                    </if>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="searchBtn" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        

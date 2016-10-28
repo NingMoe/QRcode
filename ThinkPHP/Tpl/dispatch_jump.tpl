@@ -1,80 +1,49 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>哎呀…您访问的页面不存在</title>
-
-        <style>
-            *{margin:0;padding:0}
-            body{font-family:"微软雅黑";background:#DAD9D7}
-            img{border:none}
-            a *{cursor:pointer}
-            ul,li{list-style:none}
-            table{table-layout:fixed;}
-            table tr td{word-break:break-all; word-wrap:break-word;}
-
-            a{text-decoration:none;outline:none}
-            a:hover{text-decoration:underline}
-            .cf:after{content: ".";display: block;height: 0;font-size: 0;clear:both;visibility: hidden;}
-            .cf{zoom: 1;clear:both}
-
-            .bg{width:100%;background:url("__PUBLIC__/Images/error/01.jpg") no-repeat center top #DAD9D7;position:absolute;top:0;left:0;height:600px;overflow:hidden}
-            .cont{margin:0 auto;width:500px;line-height:20px;}
-            .c1{height:360px;text-align:center}
-            .c1 .img1{margin-top:180px}
-            .c1 .img2{margin-top:165px}
-            .cont h2{text-align:center;color:#555;font-size:18px;font-weight:normal;height:35px}
-            .c2{height:35px;text-align:center}
-            .c2 a{display:inline-block;margin:0 4px;font-size:14px;height:23px;color:#626262;padding-top:1px;text-decoration:none;text-align:left}
-            .c2 a:hover{color:#626262;text-decoration:none;}
-            .c2 a.home{width:66px;background:url("__PUBLIC__/Images/error/02.png");padding-left:30px}
-            .c2 a.home:hover{background:url("__PUBLIC__/Images/error/02.png") 0 -24px}
-            .c2 a.home:active{background:url("__PUBLIC__/Images/error/02.png") 0 -48px}
-            .c2 a.re{width:66px;background:url("__PUBLIC__/Images/error/03.png");padding-left:30px}
-            .c2 a.re:hover{background:url("__PUBLIC__/Images/error/03.png") 0 -24px}
-            .c2 a.re:active{background:url("__PUBLIC__/Images/error/03.png") 0 -48px}
-            .c2 a.sr{width:153px;background:url("__PUBLIC__/Images/error/04.png");padding-left:28px}
-            .c2 a.sr:hover{background:url("__PUBLIC__/Images/error/04.png") 0 -24px}
-            .c2 a.sr:active{background:url("__PUBLIC__/Images/error/04.png") 0 -48px}
-            .c3{height:180px;text-align:center;color:#999;font-size:12px}
-            #bf{position:absolute;top:269px;left:0;width:100%}
-            .bf1{margin:0 auto;width:99px;padding-left:32px}
-            .bd{height:600px;overflow:hidden}
-            #box{position:absolute;top:165px;left:0;width:100%;text-align:center}
-            .bf1{margin:0 auto;width:99px;padding-left:32px}
-        </style>
-
-    </head>
-    <body>
-        <div class="bg">
-            <div class="cont">
-                <div class="c1"><img src="__PUBLIC__/Images/error/01.png" class="img1" /></div>
-                <present name="message">
-                    <h2 class="success"><?php echo($message); ?></h2>
-                    <else/>
-                    <h2 class="error"><?php echo($error); ?></h2>
-                </present>
-                <div class="c2">
-                    <b id="wait"><?php echo($waitSecond); ?></b>秒后，返回
-                    <a id="href" href="http://218.244.134.57/qrcode/index.php/Index/home" class="home">网站首页</a>
-                </div>
-                <h2 class="detail"></h2>
-                <div class="c3"><a href="http://www.neoway.com/cn/index.aspx" class="c3">有方</a>提醒您 - 您可能①输入了错误的用户名或密码,②输入了错误的网址,<br>③或者该网页已删除或移动</div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            (function() {
-                var wait = document.getElementById('wait'), href = document.getElementById('href').href;
-                var interval = setInterval(function() {
-                    var time = --wait.innerHTML;
-                    if (time == 0) {
-                        location.href = href;
-                        clearInterval(interval);
-                    };
-                }, 1000);
-            })();
-        </script>
-    </body>
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>跳转提示</title>
+<style type="text/css">
+*{ padding: 0; margin: 0; }
+body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
+.system-message{ padding: 24px 48px; }
+.system-message h1{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px; }
+.system-message .jump{ padding-top: 10px}
+.system-message .jump a{ color: #333;}
+.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 36px }
+.system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display:none}
+</style>
+</head>
+<body>
+<div class="system-message">
+<?php if(isset($message)) {?>
+<h1>:)</h1>
+<p class="success"><?php echo($message); ?></p>
+<?php }else{?>
+<h1>:(</h1>
+<p class="error"><?php echo($error); ?></p>
+<?php }?>
+<p class="detail"></p>
+<p class="jump">
+页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+</p>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
 </html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PDF文件预览</title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/pdf/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/pdf/default.css">
+        <link rel="stylesheet" media="screen" href="__PUBLIC__/Css/pdf/jquery.touchPDF.css" />
+        <!--[if IE]>
+                <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <input id="p" type="hidden" value="<{$filerepeat}>"/>
+        <div id="myPDF" style="height: 100%; width: 100%; margin: auto;"></div>
+        <div style="text-align: center;"><button onclick="javascript:history.go(-1);">返回</button></div>
+
+
+        <script src="__PUBLIC__/Js/pdf/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script>window.jQuery || document.write('<script src="__PUBLIC__/Js/pdf/jquery-1.11.0.min.js"><\/script>');</script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/pdf.compatibility.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/pdf.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/jquery.touchSwipe.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/jquery.touchPDF.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/jquery.panzoom.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Js/pdf/jquery.mousewheel.js"></script>
+        <script type="text/javascript">
+
+            $(function() {
+                $("#myPDF").pdf({
+                    source: "__PUBLIC__/Uploads/"+$("#p").val(),
+                });
+            });
+        </script>
+    </body>
+</html>
